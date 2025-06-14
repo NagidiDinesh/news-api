@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News Digest Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { text-align: center; }
+        h2 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .related { font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <h1>Police News Digest - {{ district }}</h1>
+    <h2>Date: {{ date }}</h2>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Source</th>
+            <th>Date</th>
+            <th>Related Articles (Past 7 Days)</th>
+        </tr>
+        {% for article in articles %}
+        <tr>
+            <td>{{ article.title }}</td>
+            <td>{{ article.category }}</td>
+            <td>{{ article.source.name }}</td>
+            <td>{{ article.publishedAt }}</td>
+            <td>
+                {% for related in article.related_articles %}
+                    <div class="related">
+                        {{ related.title }} ({{ related.source.name }}, {{ related.publishedAt }})
+                    </div>
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

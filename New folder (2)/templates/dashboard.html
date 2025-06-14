@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - News Digest</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>Police News Digest Dashboard</h2>
+        <div style="text-align: right; margin-bottom: 10px;">
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+        <div class="controls">
+            <div class="form-group">
+                <label for="district">Select District:</label>
+                <select id="district" name="district">
+                    {% for district in districts %}
+                        <option value="{{ district }}">{{ district }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date">Select Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <button id="fetch-news">Fetch News</button>
+        </div>
+        <div id="news-results">
+            <table id="news-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Source</th>
+                        <th>Date</th>
+                        <th>Related Articles</th>
+                    </tr>
+                </thead>
+                <tbody id="news-body"></tbody>
+            </table>
+        </div>
+        <button id="download-pdf" style="display: none;">Download PDF</button>
+        <p id="error-message" class="error"></p>
+    </div>
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>
